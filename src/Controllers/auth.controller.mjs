@@ -6,7 +6,7 @@ const login = async (req, res) => {
 
   try {
     // Check if the user exists
-    const found = await User.findOne({ phone:credentialData.phone });
+    const found = await User.findOne({ phone: credentialData.phone });
     if (!found) {
       return res.status(404).json({ msg: "User not found", success: false });
     }
@@ -37,7 +37,7 @@ const register = async (req, res) => {
 
   try {
     // Check if the user exists
-    const found = await User.findOne({ phone: details.phone });
+    const found = await User.findOne({ phone: details.phone }).lean();
     if (!found) {
       const user = new User(details);
       await user.save();
